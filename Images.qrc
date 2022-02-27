@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/Images">
         <file>GitHub.png</file>
+        <file>AppPic.PNG</file>
     </qresource>
 </RCC>
