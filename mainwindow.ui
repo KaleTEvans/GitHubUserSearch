@@ -60,7 +60,7 @@ color: rgb(255, 255, 255);</string>
             <x>20</x>
             <y>30</y>
             <width>271</width>
-            <height>206</height>
+            <height>224</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
@@ -74,7 +74,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="lineEditUsername">
                <property name="readOnly">
                 <bool>true</bool>
                </property>
@@ -92,7 +92,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_2">
+              <widget class="QLineEdit" name="lineEditName">
                <property name="readOnly">
                 <bool>true</bool>
                </property>
@@ -110,11 +110,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_3">
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-              </widget>
+              <widget class="QSpinBox" name="lineEditRepo"/>
              </item>
             </layout>
            </item>
@@ -128,7 +124,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_4">
+              <widget class="QLineEdit" name="lineEditAccount">
                <property name="readOnly">
                 <bool>true</bool>
                </property>
@@ -146,7 +142,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_5">
+              <widget class="QLineEdit" name="lineEditFollowers">
                <property name="readOnly">
                 <bool>true</bool>
                </property>
@@ -164,7 +160,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_6">
+              <widget class="QLineEdit" name="lineEditFollowing">
                <property name="readOnly">
                 <bool>true</bool>
                </property>
@@ -215,12 +211,12 @@ color: rgb(255, 255, 255);</string>
          <property name="title">
           <string>RepoList</string>
          </property>
-         <widget class="QTextEdit" name="textEditRepo">
+         <widget class="QListWidget" name="textEditRepo">
           <property name="geometry">
            <rect>
             <x>10</x>
             <y>20</y>
-            <width>271</width>
+            <width>231</width>
             <height>181</height>
            </rect>
           </property>
