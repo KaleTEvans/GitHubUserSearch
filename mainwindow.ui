@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="searchButton">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>20</y>
+      <x>360</x>
+      <y>0</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -33,13 +33,13 @@ color: rgb(255, 255, 255);</string>
      <string>Find User</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>60</y>
-      <width>661</width>
-      <height>481</height>
+      <x>70</x>
+      <y>50</y>
+      <width>711</width>
+      <height>531</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -54,7 +54,7 @@ color: rgb(255, 255, 255);</string>
          <property name="title">
           <string>User Info</string>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>20</x>
@@ -142,11 +142,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditFollowers">
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-              </widget>
+              <widget class="QSpinBox" name="lineEditFollowers"/>
              </item>
             </layout>
            </item>
@@ -160,11 +156,7 @@ color: rgb(255, 255, 255);</string>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEditFollowing">
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-              </widget>
+              <widget class="QSpinBox" name="lineEditFollowing"/>
              </item>
             </layout>
            </item>
@@ -216,8 +208,8 @@ color: rgb(255, 255, 255);</string>
            <rect>
             <x>10</x>
             <y>20</y>
-            <width>231</width>
-            <height>181</height>
+            <width>311</width>
+            <height>221</height>
            </rect>
           </property>
          </widget>

@@ -22,14 +22,14 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::clearValues()
 {
     ui->labelImage->clear();
-    ui->labelName->clear();
-    ui->labelUser->clear();
-    ui->labelRepo->clear();
+    ui->lineEditName->clear();
+    ui->lineEditUsername->clear();
     ui->lineEditRepo->clear();
+    ui->textEditRepo->clear();
     ui->textEditBio->clear();
-    ui->labelFollowers->clear();
-    ui->labelFollowing->clear();
-    ui->labelAccount->clear();
+    ui->lineEditFollowers->clear();
+    ui->lineEditFollowing->clear();
+    ui->lineEditAccount->clear();
     dataBuffer.clear();
 }
 
@@ -47,7 +47,7 @@ void MainWindow::on_searchButton_clicked()
         clearValues();
         // these are the api calls, one to the user data, and one to the users repos
         QNetworkRequest req{QUrl(QString("https://api.github.com/users/%1").arg(username))};
-        //QNetworkRequest repoReq{QUrl(QString("https://api.github.com/users/%1/repos").arg(username))};
+        QNetworkRequest repoReq{QUrl(QString("https://api.github.com/users/%1/repos").arg(username))};
 
         // connect and read the data for the user
         netReply = netManager->get(req);
@@ -55,9 +55,9 @@ void MainWindow::on_searchButton_clicked()
         connect(netReply, &QNetworkReply::finished, this, &MainWindow::finishReading);
 
         // connect and read the data for the user's repos
-        //repoReply = netManager->get(repoReq);
-        //connect(repoReply, &QNetworkReply::readyRead, this, &MainWindow::readDataForRepo);
-        //connect(repoReply, &QNetworkReply::finished, this, &MainWindow::finishedGettingRepos);
+        repoReply = netManager->get(repoReq);
+        connect(repoReply, &QNetworkReply::readyRead, this, &MainWindow::readDataForRepo);
+        connect(repoReply, &QNetworkReply::finished, this, &MainWindow::finishedGettingRepos);
     }
 }
 
@@ -91,50 +91,50 @@ void MainWindow::finishReading()
         ui->textEditBio->setText(bio);
 
         // Set follower and following count
-//        auto follower = userJsonInfo.value("followers").toString();
-//        auto following = userJsonInfo.value("following").toString();
-//        ui->lineEditFollowers->setText(follower);
-//        ui->lineEditFollowing->setText(following);
+        auto follower = userJsonInfo.value("followers").toInt();
+        auto following = userJsonInfo.value("following").toInt();
+        ui->lineEditFollowers->setValue(follower);
+        ui->lineEditFollowing->setValue(following);
 
         // Set account type
-//        QString type = userJsonInfo.value("type").toString();
-//        ui->lineEditAccount->setText(type);
+        QString type = userJsonInfo.value("type").toString();
+        ui->lineEditAccount->setText(type);
 
         // Set picture
-//        auto picLink = userJsonInfo.value("avatar_url").toString();
-//        QNetworkRequest link{QUrl(picLink)};
-//        netReply = netManager->get(link);
-//        connect(netReply, &QNetworkReply::finished, this, &MainWindow::setUserImage);
-//        dataBuffer.clear();
+        auto picLink = userJsonInfo.value("avatar_url").toString();
+        QNetworkRequest link{QUrl(picLink)};
+        netReply = netManager->get(link);
+        connect(netReply, &QNetworkReply::finished, this, &MainWindow::setUserImage);
+        dataBuffer.clear();
     }
 }
 
 // Set the user image
-//void MainWindow::setUserImage()
-//{
-//    img->loadFromData(netReply->readAll());
-//    QPixmap temp = img->scaled(ui->labelImage->size());
-//    ui->labelImage->setPixmap(temp);
-//}
+void MainWindow::setUserImage()
+{
+    img->loadFromData(netReply->readAll());
+    QPixmap temp = img->scaled(ui->labelImage->size());
+    ui->labelImage->setPixmap(temp);
+}
 
-//void MainWindow::readDataForRepo()
-//{
-//    dataBuffer.append(repoReply->readAll());
-//}
+void MainWindow::readDataForRepo()
+{
+    dataBuffer.append(repoReply->readAll());
+}
 
-//void MainWindow::finishedGettingRepos()
-//{
-//    if(repoReply->error() != QNetworkReply::NoError){
-//        qDebug() << "Error Getting List of Repo: " << netReply->errorString();
-//        QMessageBox::warning(this,"Error",QString("Request[Error] : %1").arg(netReply->errorString()));
-//    }else{
-//        QJsonArray repoInfo = QJsonDocument::fromJson(dataBuffer).array();
-//        ui->lineEditRepo->setValue(repoInfo.size());
-//        for(int i{0}; i < ui->lineEditRepo->value(); ++i){
-//            auto repo = repoInfo.at(i).toObject();
-//            QString repoName = repo.value("name").toString();
-//            ui->textEditRepo->addItem(repoName);
-//        }
-//    }
-//}
+void MainWindow::finishedGettingRepos()
+{
+    if(repoReply->error() != QNetworkReply::NoError){
+        qDebug() << "Error Getting List of Repo: " << netReply->errorString();
+        QMessageBox::warning(this,"Error",QString("Request[Error] : %1").arg(netReply->errorString()));
+    }else{
+        QJsonArray repoInfo = QJsonDocument::fromJson(dataBuffer).array();
+        ui->lineEditRepo->setValue(repoInfo.size());
+        for(int i{0}; i < ui->lineEditRepo->value(); ++i){
+            auto repo = repoInfo.at(i).toObject();
+            QString repoName = repo.value("name").toString();
+            ui->textEditRepo->addItem(repoName);
+        }
+    }
+}
 

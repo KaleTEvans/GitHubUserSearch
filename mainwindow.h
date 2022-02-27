@@ -25,10 +25,10 @@ public:
 private slots:
     void on_searchButton_clicked();
     void readData();
-    //void readDataForRepo();
-    //void finishedGettingRepos();
+    void readDataForRepo();
+    void finishedGettingRepos();
     void finishReading();
-    //void setUserImage();
+    void setUserImage();
 
 private:
     Ui::MainWindow *ui;
